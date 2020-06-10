@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados Estudiante</title>
+    <link rel="icon" href="favicon.ico">
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        .buttonMenu{
+            background: #169BD5;
+            color: white;
+        }
+        .buttonMenu:hover {
+            background: transparent;
+            color: white;
+        }
+        .buttonMenu p{
+            color: #BBF4F9;
+        }
+        .buttonMenu:hover p{
+            color: white;
+        }
+     </style>
+</head>
+<body>
+{% csrf_token %}
+{% if mensaje %}
+    <script>
+        alert('{{mensaje}}');
+    </script>
+{% endif %}
+<div style="width: 100%; height: 100px;" id="barra_de_logo">
+    <div style="width: 180px; height: 100%; margin-left: 15%; float: left" id="logo">
+        <img src="img/logoEAFIT.jpg">
+    </div>
+    <div style="width: 250px; height: 100%; margin-left: 33%; float: left" id="usuario">
+        <h6 style="margin-top: 17%; text-align: right; font-family:Arial; font-size: 20px"></h6>
+    </div>
+    <div style="width: 180px; height: 100%; margin-right: 15%; float: right" id="salir">
+        <button type="button" class="btn btn-default" onclick ="location.href='{% url 'log' %}'" style="border: solid 1px; margin-top: 18%; width: 150px">Salir</button>
+    </div>
+</div>
+<div style="width: 100%; height: 100px; float: left; background: #000066" id="nombre_software">
+    <h6 style="font-family: Arial; color: white; margin-left: 5%; margin-right: 5%; margin-top: 30px; font-size:40px">Resultados del estudiante: {{estudiante}} en la practica: {{practica}} del grupo: {{grupo}}</h6>
+</div>
+<br>
+<br><br><br><br>
+<h6 style="font-family: Arial; color: #00C1FF; font-size:30px" class="card-title text-center">Resultados practica {{practica}}</h6>
+<div style="margin-left: 20%; margin-right: 20%">
+     <br>
+    <table class="table table-bordered table-striped" style="text-align: center;">
+        <thead>
+            <tr>
+                {% for campo in arregloCampos %}
+                    <th><p>{{campo}}</p></th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for experimentoRealizado in arregloExperimentos %}
+                <tr>
+                    {% for dato in experimentoRealizado %}
+                        <th><p>{{dato}}</p></th>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br>
+<br>
+</body>

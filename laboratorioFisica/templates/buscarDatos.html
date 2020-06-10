@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="favicon.ico">
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    <title>Experimentos</title>
+</head>
+<body>
+{% block content %}
+{% csrf_token %}
+<table class="table table-bordered table-striped" style="text-align: center; width: 84%">
+    <thead>
+        <tr>
+            <th style="width: 100px">Distancia</th>
+            <th style="width: 100px">Distancia 1</th>
+            <th style="width: 100px">Distancia 2</th>
+            <th style="width: 100px">Tiempo</th>
+            <th style="width: 100px">Tiempo 1</th>
+            <th style="width: 100px">Tiempo 2</th>
+            <th style="width: 100px">Velocidad 1</th>
+            <th style="width: 100px">Velocidad 2</th>
+            <th style="width: 100px">Aceleracion</th>
+        </tr>
+    </thead>
+    {% for experimento in arregloExperimentos %}
+        <tr>
+            {% for key, value in experimento.items %}
+                <th>{{value}}</th>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+  <div class="form-row">
+      <div class="form-group col-md-4">
+        <label>Ver las graficas correspondientes</label>
+        <a button type="submit" href="/verGraficas?datos={{arregloExperimentos}}" class="form-control btn btn-primary" >Ver Graficos</a>
+    </div>
+  </div>
+
+
+<!--<button type="submit" > Descargar </button>-->
+{% endblock %}
+</body>
+</html>

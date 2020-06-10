@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seleccion Practica</title>
+    <link rel="icon" href="favicon.ico">
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        function buscarDatos() {
+
+            if ($('#seleccionarPractica').text().length == 0) {
+                alert('Seleccione una practica');
+            }else{
+                var x = $("#practica").val();
+                document.getElementById("seleccionarPractica").style.display = "none";
+                document.getElementById("datos").style.display = "block";
+                var direccion = "/consultar?practicaSeleccionada="+x
+                $("#datos").load(direccion);
+            }
+
+        }
+    </script>
+    <style>
+        #datos{
+            display: none;
+            width: auto;
+            height: auto;
+            margin-left: 15%;
+        }
+
+        .buttonMenu{
+            background: #169BD5;
+            color: white;
+        }
+
+        .buttonMenu:hover {
+            background: transparent;
+            color: white;
+        }
+
+        .buttonMenu p{
+            color: #BBF4F9;
+        }
+
+        .buttonMenu:hover p{
+            color: white;
+        }
+
+     </style>
+</head>
+{% csrf_token %}
+<body>
+<div style="width: 100%; height: 100px;" id="barra_de_logo">
+
+</div>
+
+<div style="width: 100%; height: 100px; float: left; background: #000066" id="nombre_software">
+    <h6 style="font-family: Arial; color: white; margin-left: 15%; margin-top: 30px; font-size:40px">Practicas de Laboratorios Universidad EAFIT</h6>
+</div>
+<br>
+<nav class="navbar navbar-expand-lg" style="background-color: #000066; wight: 100%; height: 80px">
+  <div class="collapse navbar-collapse" id="navbarNav" style="height: 100%">
+    <ul class="navbar-nav" style="margin-left: 14.5%; height: 100%; margin-right: 13%; width: 100%">
+      <li style="height: 80%; width: 300px; background: #169BD5;"></li>
+      <li class="nav-item active buttonMenu" style="height: 80%; width: 100%;">
+        <button type="button" class="btn" style="border-radius:0%; height: 80%; width: 100%;"><p style="font-family: Arial; font-size: 25px">Practica con Arduino</p></button>
+      </li>
+      <li class="nav-item active buttonMenu" style="height: 80%; width: 100%">
+        <button type="button" class="btn" style="border-radius:0%; height: 80%; width: 100%" onclick="location.href='{% url 'seleccionPractica' %}'"><p style="font-family: Arial; font-size: 25px">Practica con simulación</p></button>
+      </li>
+      <li style="height: 80%; width: 300px; background: #169BD5;"></li>
+    </ul>
+  </div>
+</nav>
+
+<br>
+<br>
+  <div class="form-row" style="width: 80%; margin-left: 10%"; id="seleccionarPractica">
+    {% csrf_token %}
+    <div class="form-group col-md-6">
+        <label>Seleccione la Practica de Laboratorio</label>
+        <select class="form-control" id="practica" name="practica" required>
+            <option value="" disabled selected>Seleciones una opcion</option>
+            {% for practica in arregloPracticas %}
+                <option value="{{practica}}">{{practica}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group col-md-6">
+        <label>Extraer Informacion</label>
+        <a class="form-control btn btn-primary" href="#" onclick="buscarDatos()">Buscar Experimentos</a>
+    </div>
+  </div>
+
+<div id="datos">
+
+</div>
+
+</body>
+</html>

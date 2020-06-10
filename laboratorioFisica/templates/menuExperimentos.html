@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu Principal</title>
+    <link rel="icon" href="favicon.ico">
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        function openNav() {
+            document.getElementById("opciones").style.width = "400px";
+            document.getElementById("abrir").style.display = "none";
+        }
+
+        function AgregarPractica() {
+            document.getElementById("VerPractica").style.display = "none";
+            document.getElementById("AgregarExperimento").style.display = "none";
+            document.getElementById("AgregarPractica").style.display = "block";
+            $("#AgregarPractica").load("/agregarPractica");
+        }
+
+        function VerPractica() {
+            document.getElementById("AgregarPractica").style.display = "none";
+            document.getElementById("AgregarExperimento").style.display = "none";
+            document.getElementById("VerPractica").style.display = "block";
+            $("#VerPractica").load("/verPractica");
+        }
+
+        function AgregarExperimento() {
+            document.getElementById("AgregarPractica").style.display = "none";
+            document.getElementById("VerPractica").style.display = "none";
+            document.getElementById("AgregarExperimento").style.display = "block";
+            $("#AgregarExperimento").load("/agregarExperimento");
+        }
+
+        function closeNav() {
+            document.getElementById("opciones").style.width = "0";
+            document.getElementById("abrir").style.display = "block";
+        }
+    </script>
+    <style>
+        #abrir{
+            display: none;
+        }
+
+        #opciones{
+            width: 400px;
+        }
+
+        #AgregarPractica{
+            display: none;
+            width: 70%;
+            height: auto;
+            margin-left: 25%;
+        }
+
+        #AgregarExperimento{
+            display: none;
+            width: 70%;
+            height: auto;
+            margin-left: 25%;
+        }
+
+        #VerPractica{
+            display: none;
+            width: 70%;
+            height: auto;
+            margin-left: 30%;
+        }
+
+        .buttonMenu{
+            background: #169BD5;
+            color: white;
+        }
+
+        .buttonMenu:hover {
+            background: transparent;
+            color: white;
+        }
+
+        .buttonMenu p{
+            color: #BBF4F9;
+        }
+
+        .buttonMenu:hover p{
+            color: white;
+        }
+
+        .menuDesplegable {
+            height: auto;
+            width: 0;
+            position: fixed;
+            background-color: #ffff;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .menuDesplegable .opcion1 {
+            width: 75%;
+            height: auto;
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: black;
+            display: block;
+            margin-top: 15%;
+            border: solid 1px #CCCECE;
+        }
+
+        .menuDesplegable .opcion2 {
+            width: 75%;
+            height: auto;
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: black;
+            display: block;
+            border: solid 1px #CCCECE;
+        }
+
+        .menuDesplegable .opcion1:hover {
+            background-color: #F7F7F7;
+        }
+
+        .menuDesplegable .opcion2:hover {
+            background-color: #F7F7F7;
+        }
+
+        .menuDesplegable .labelPracticas:hover {
+            background-color: #F7F7F7;
+        }
+
+
+        .menuDesplegable .closebtn {
+            position: absolute;
+            right: 18%;
+            text-decoration: none;
+            font-size: 36px;
+            color: black;
+            display: block;
+            background: orange;
+            border-radius: 0px 5px 5px 0px;
+        }
+
+        .menuDesplegable .closebtn:hover {
+            background: #169BD5;
+        }
+
+        .menuDesplegable .labelPracticas{
+            width: 75%;
+            height: 55px;
+            background: #169BD5;
+            position: absolute;
+            font-size: 25px;
+            border-radius: 5px 5px 0px 0px;
+            border: solid 1px #CCCECE;
+        }
+
+        .desplegarMenu{
+            font-size:30px;
+            cursor:pointer;
+            background-color: orange;
+            border-radius: 0px 5px 5px 0px;
+            width: 30px;
+        }
+
+        .desplegarMenu:hover{
+            background-color: #169BD5;
+
+        }
+     </style>
+</head>
+<body>
+{% csrf_token %}
+<div style="width: 100%; height: 100px;" id="barra_de_logo">
+    <div style="width: 180px; height: 100%; margin-left: 15%; float: left" id="logo">
+    </div>
+    <div style="width: 250px; height: 100%; margin-left: 33%; float: left" id="usuario">
+        <h6 style="margin-top: 17%; text-align: right; font-family:Arial; font-size: 20px">{{email}}</h6>
+    </div>
+    <div style="width: 180px; height: 100%; margin-right: 15%; float: right" id="salir">
+        <button type="button" class="btn btn-default" onclick ="location.href='{% url 'log' %}'" style="border: solid 1px; margin-top: 18%; width: 150px">Salir</button>
+    </div>
+
+</div>
+
+<div style="width: 100%; height: 100px; float: left; background: #000066" id="nombre_software">
+    <h6 style="font-family: Arial; color: white; margin-left: 15%; margin-top: 30px; font-size:40px">Practicas de Laboratorios Universidad EAFIT</h6>
+</div>
+<br>
+<nav class="navbar navbar-expand-lg" style="background-color: #000066; wight: 100%; height: 80px">
+  <div class="collapse navbar-collapse" id="navbarNav" style="height: 100%">
+    <ul class="navbar-nav" style="margin-left: 14.5%; height: 100%; margin-right: 13%; width: 100%">
+      <li style="height: 80%; width: 300px; background: #169BD5;"></li>
+      <li class="nav-item active buttonMenu" style="height: 80%; width: 100%;">
+        <button type="button" class="btn" style="border-radius:0%; height: 80%; width: 100%;"><p style="font-family: Arial; font-size: 25px">Control de Usuarios</p></button>
+      </li>
+      <li class="nav-item active buttonMenu" style="height: 80%; width: 100%">
+        <button type="button" class="btn" style="border-radius:0%; height: 80%; width: 100%" onclick="location.href='{% url 'controlPracticas' %}'"><p style="font-family: Arial; font-size: 25px">Control de Practicas</p></button>
+      </li>
+      <li style="height: 80%; width: 300px; background: #169BD5;"></li>
+    </ul>
+  </div>
+</nav>
+
+<br>
+<br>
+
+<div id="opciones" class="menuDesplegable">
+    <div class="labelPracticas">
+      <p style="margin-left:34px; margin-top: 4%; font-family: Arial; font-size: 20px">Control de Practicas</p>
+    </div>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a class="opcion1" href="#" onclick="VerPractica()">Ver Practicas</a>
+    <a class="opcion2" href="#" onclick="AgregarPractica()">Agregar Practica</a>
+    <a class="opcion2" href="#" onclick="AgregarExperimento()">Agregar Experimento</a>
+</div>
+
+<span class="desplegarMenu" onclick="openNav()" id="abrir">&#10132;</span>
+
+<div id="AgregarPractica">
+</div>
+
+<div id="VerPractica">
+</div>
+
+<div id="AgregarExperimento">
+</div>
+
+<br><br>
+
+
+</body>
+</html>

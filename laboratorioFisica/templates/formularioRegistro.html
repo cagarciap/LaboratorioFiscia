@@ -1,0 +1,92 @@
+{% if mensaje %}
+<script>
+    alert('{{mensaje}}');
+</script>
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="icon" href="favicon.ico">
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    <style>
+        .buttonMenu{
+            background: #169BD5;
+            color: white;
+        }
+        .buttonMenu:hover {
+            background: transparent;
+            color: white;
+        }
+        .buttonMenu p{
+            color: #BBF4F9;
+        }
+        .buttonMenu:hover p{
+            color: white;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>SigIn</title>
+</head>
+<body>
+{% csrf_token %}
+<div style="width: 100%; height: 200px;" id="barra_de_logo">
+    <div style="width: 180px; height: 100%; margin-left: 15%; float: left" id="logo">
+        <img src="/imagenLogo" width="500px" height="400" class="img-fluid"/>
+    </div>
+</div>
+
+<div style="width: 100%; height: 100px; float: left; background: #000066" id="nombre_software">
+    <h6 style="font-family: Arial; color: white; margin-left: 15%; margin-top: 30px; font-size:40px">Practicas de Laboratorio Física Universidad EAFIT</h6>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div style="width: 500px; height: 200px; margin-left: auto; margin-right: auto">
+    <h6 style="font-family: Arial; color: #00C1FF; font-size:40px" class="card-title text-center">Inicio de sesión</h6>
+    <br>
+    <form action="/registroEstudiante/" method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label style="font-family: Arial; color: #00C1FF; font-size:25px; text-align: center">Correo Institucional (*)</label>
+                <input type="email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group col-md-12">
+                <label style="font-family: Arial; color: #00C1FF; font-size:25px">Contraseña (*)</label>
+                <input type="password" name="passw" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label style="font-family: Arial; color: #00C1FF; font-size:25px; text-align: center">Nombre Completo (*)</label>
+                <input type="text" name="nombre" class="form-control" required>
+            </div>
+            <div class="form-group col-md-12">
+                <label style="font-family: Arial; color: #00C1FF; font-size:25px">Grupo (*)</label><br>
+                <select name="grupo" class="form-control" required>
+                    <option selected disabled>Seleccione una opcion</option>
+                    {% for grupo in arregloGrupos%}
+                        <option value="{{grupo}}">{{grupo}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">REGISTRARSE</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

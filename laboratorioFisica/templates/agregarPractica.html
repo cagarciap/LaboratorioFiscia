@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="favicon.ico">
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Agregar Practica</title>
+
+</head>
+<body>
+
+<H2>Agregar Practica de Laboratorio</H2>
+
+<form action="/formularioAgregarPractica/" method="post">
+    {% csrf_token %}
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Nombre Practica de Laboratorio</label>
+      <input type="text" name="nombrePractica" class="form-control" required>
+    </div>
+    <div class="form-group col-md-6">
+      <label>Materia</label>
+      <input type="text" name="materia" class="form-control" required>
+    </div>
+  </div>
+
+   <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Semana en que se realiza</label>
+      <input type="text" name="semana" class="form-control" required>
+    </div>
+    <div class="form-group col-md-6">
+        <label>Agregar Practica de Laboratorio</label>
+        <input type="submit" class="form-control btn btn-primary" value="Enviar Registro">
+    </div>
+  </div>
+</form>
+</body>
+</html>

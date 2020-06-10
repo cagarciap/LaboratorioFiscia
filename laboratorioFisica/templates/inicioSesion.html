@@ -1,0 +1,87 @@
+{% if mensaje %}
+<script>
+    alert('{{mensaje}}');
+</script>
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="icon" href="favicon.ico">
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    <style>
+        .buttonMenu{
+            background: #169BD5;
+            color: white;
+        }
+        .buttonMenu:hover {
+            background: transparent;
+            color: white;
+        }
+        .buttonMenu p{
+            color: #BBF4F9;
+        }
+        .buttonMenu:hover p{
+            color: white;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>SigIn</title>
+</head>
+<body>
+
+<div style="width: 100%; height: 100px;" id="barra_de_logo">
+    <div style="width: 180px; height: 100%; margin-left: 15%; float: left" id="logo">
+        <img src="img/logoEAFIT.jpg">
+    </div>
+    <div style="width: 250px; height: 100%; margin-left: 33%; float: left" id="usuario">
+        <h6 style="margin-top: 17%; text-align: right; font-family:Arial; font-size: 20px"></h6>
+    </div>
+    <div style="width: 180px; height: 100%; margin-right: 15%; float: right" id="salir">
+
+    </div>
+</div>
+<div style="width: 100%; height: 100px; float: left; background: #000066" id="nombre_software">
+    <h6 style="font-family: Arial; color: white; margin-left: 15%; margin-top: 30px; font-size:40px">Practicas de Laboratorios Universidad EAFIT</h6>
+</div>
+<br>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div style="width: 500px; height: 200px; margin-left: auto; margin-right: auto">
+    <h6 style="font-family: Arial; color: #00C1FF; font-size:40px" class="card-title text-center">Inicio de sesión</h6>
+    <br>
+    <form action="/InicioSesion/" method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label style="font-family: Arial; color: #00C1FF; font-size:25px; text-align: center">Usuario (*)</label>
+                <input type="email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group col-md-12">
+                <label style="font-family: Arial; color: #00C1FF; font-size:25px">Contraseña (*)</label>
+                <input type="password" name="passw" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Ingresar</button>
+            </div>
+            <div class="form-group col-md-6">
+                <button type="button" class="btn btn-lg btn-primary btn-block text-uppercase" style="height: 48px" onclick="location.href='{% url 'registroUsuario' %}'">Registrate</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

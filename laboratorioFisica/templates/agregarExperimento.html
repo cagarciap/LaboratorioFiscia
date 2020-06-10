@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="favicon.ico">
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Agregar Practica</title>
+</head>
+<body>
+
+<H2>Agregar Practica de Laboratorio</H2>
+
+<form action="/formularioAgregarExperimento/" method="post">
+    {% csrf_token %}
+  <div class="form-row">
+    <div class="form-group col-md-4">
+        <label>Distancia</label>
+        <input type="number" name="distancia" step="0.01" class="form-control">
+    </div>
+    <div class="form-group col-md-4">
+      <label>Distancia 1</label>
+      <input type="number" name="distancia1" step="0.01" class="form-control">
+    </div>
+    <div class="form-group col-md-4">
+      <label>Distancia 2</label>
+      <input type="number" name="distancia2" step="0.01" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label>Tiempo</label>
+      <input type="number" name="tiempo" step="0.01" class="form-control" >
+    </div>
+    <div class="form-group col-md-4">
+      <label>Tiempo 1</label>
+      <input type="number" name="tiempo1" step="0.01" class="form-control" >
+    </div>
+    <div class="form-group col-md-4">
+      <label>Tiempo 2</label>
+      <input type="number" name="tiempo2" step="0.01" class="form-control" >
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label>Velocidad 1</label>
+      <input type="number" name="velocidad1" step="0.01" class="form-control" >
+    </div>
+    <div class="form-group col-md-4">
+      <label>Velocidad 2</label>
+      <input type="number" name="velocidad2" step="0.01" class="form-control" >
+    </div>
+    <div class="form-group col-md-4">
+      <label>Aceleracion</label>
+      <input type="number" name="aceleracion" step="0.01" class="form-control" >
+    </div>
+  </div>
+
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+        <label>Seleccione la Practica de Laboratorio</label>
+        <select class="form-control" id="practica" name="practica" required>
+            <option value="" disabled selected>Seleciones una opcion</option>
+            {% for practica in arregloPracticas %}
+                <option value="{{practica}}">{{practica}}</option>
+            {% endfor %}
+        </select>
+    </div>
+  </div>
+  <br>
+  <br>
+  <H2>Tambien puedes cargar un archivo CSV</H2>
+  <br>
+  <br>
+  <div class="form-row">
+     <div class="form-group col-md-4">
+      <label>Seleccione aquí para cargar un archivo</label>
+      <input type="checkbox" name="cargarArchivo" class="form-control" value="1" style="margin-left: -10%">
+    </div>
+    <div class="form-group col-md-4">
+      <label>Nombre de Archivo</label>
+      <input type="text" name="nombreArchivo" class="form-control" >
+    </div>
+    <div class="form-group col-md-4">
+        <label>Agregar Experimento a la practica seleccionada</label>
+        <input type="submit" class="form-control btn btn-primary" value="Enviar Registro">
+    </div>
+  </div>
+
+
+</form>
+</body>
+</html>

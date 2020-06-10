@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualizacion de Graficas</title>
+    <link rel="icon" href="favicon.ico">
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        function GraficaXvsT() {
+            var x = $("#experimentos").val();
+            x = x.replace(/ /g, "")
+            document.getElementById("graficaVvsT").style.display = "none";
+            document.getElementById("graficaAvsT").style.display = "none";
+            document.getElementById("graficaXvsT").style.display = "block";
+            var direccion = "/verGraficaEspecifica?grafica=XvsT&datos="+x;
+            $("#graficaXvsT").load(direccion);
+        }
+
+        function GraficaVvsT() {
+            var x = $("#experimentos").val();
+            x = x.replace(/ /g, "")
+            document.getElementById("graficaAvsT").style.display = "none";
+            document.getElementById("graficaXvsT").style.display = "none";
+            document.getElementById("graficaVvsT").style.display = "block";
+            var direccion = "/verGraficaEspecifica?grafica=VvsT&datos="+x;
+            $("#graficaVvsT").load(direccion);
+        }
+
+        function GraficaAvsT() {
+            var x = $("#experimentos").val();
+            x = x.replace(/ /g, "")
+            document.getElementById("graficaXvsT").style.display = "none";
+            document.getElementById("graficaVvsT").style.display = "none";
+            document.getElementById("graficaAvsT").style.display = "block";
+            var direccion = "/verGraficaEspecifica?grafica=AvsT&datos="+x;
+            $("#graficaAvsT").load(direccion);
+        }
+    </script>
+    <style>
+        #graficaXvsT, #graficaVvsT, #graficaAvsT{
+            display: none;
+            width: auto;
+            height: auto;
+            margin-left: 15%;
+        }
+
+        .buttonMenu{
+            background: #169BD5;
+            color: white;
+        }
+
+        .buttonMenu:hover {
+            background: transparent;
+            color: white;
+        }
+
+        .buttonMenu p{
+            color: #BBF4F9;
+        }
+
+        .buttonMenu:hover p{
+            color: white;
+        }
+     </style>
+</head>
+{% csrf_token %}
+<body>
+<div style="width: 100%; height: 100px;" id="barra_de_logo">
+</div>
+
+<div style="width: 100%; height: 100px; float: left; background: #000066" id="nombre_software">
+    <h6 style="font-family: Arial; color: white; margin-left: 15%; margin-top: 30px; font-size:40px">Practicas de Laboratorios Universidad EAFIT</h6>
+</div>
+<br>
+<nav class="navbar navbar-expand-lg" style="background-color: #000066; wight: 100%; height: 80px">
+  <div class="collapse navbar-collapse" id="navbarNav" style="height: 100%">
+    <ul class="navbar-nav" style="margin-left: 14.5%; height: 100%; margin-right: 13%; width: 100%">
+      <li style="height: 80%; width: 300px; background: #169BD5;"></li>
+      <li class="nav-item active buttonMenu" style="height: 80%; width: 100%">
+        <a class="btn" style="border-radius:0%; height: 80%; width: 100%" href="#" onclick="GraficaXvsT()"><p style="font-family: Arial; font-size: 25px">Grafica X vs T</p></a>
+      </li>
+      <li class="nav-item active buttonMenu" style="height: 80%; width: 100%">
+        <a class="btn" style="border-radius:0%; height: 80%; width: 100%" href="#" onclick="GraficaVvsT()"><p style="font-family: Arial; font-size: 25px">Grafica V vs T</p></a>
+      </li>
+      <li class="nav-item active buttonMenu" style="height: 80%; width: 100%">
+        <a class="btn" style="border-radius:0%; height: 80%; width: 100%" href="#" onclick="GraficaAvsT()"><p style="font-family: Arial; font-size: 25px">Grafica A vs T</p></a>
+      </li>
+      <li class="nav-item active buttonMenu" style="height: 80%; width: 100%">
+        <a type="submit" href="/downloadExperimentos?datos={{datos}}" class="btn" style="border-radius:0%; height: 80%; width: 100%"><p style="font-family: Arial; font-size: 25px">Descargar</p></a>
+      </li>
+      <li style="height: 80%; width: 300px; background: #169BD5;"></li>
+    </ul>
+  </div>
+</nav>
+
+
+<input type="text" value="{{datos}}" id="experimentos" disabled style="background-color: white; color: white; border: white">
+<br>
+<br>
+
+<div id="graficaXvsT">
+
+</div>
+
+<div id="graficaVvsT">
+
+</div>
+
+<div id="graficaAvsT">
+
+</div>
+
+</body>
+</html>
